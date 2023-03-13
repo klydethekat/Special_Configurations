@@ -28,13 +28,13 @@
 /**
  * Marlin release version identifier
  */
-#define SHORT_BUILD_VERSION "2.1.3 MRiscoC"
+#define SHORT_BUILD_VERSION "0.0.1 Maker Dash 3D"
 
 /**
  * Verbose version identifier which should contain a reference to the location
  * from where the binary was downloaded or the source code was compiled.
  */
-#define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION " Ender3V2Neo-422-BLT-IS-LA-MPC, based on bugfix-2.1.x"
+#define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION "Ender3V2Neo-422-001MD3D, based on bugfix-2.1.x" // KEN tmi
 
 /**
  * The STRING_DISTRIBUTION_DATE represents when the binary file was built,
@@ -49,7 +49,7 @@
 /**
  * Defines a generic printer name to be output to the LCD after booting Marlin.
  */
-#define MACHINE_NAME "Ender 3V2"
+#define MACHINE_NAME "Ender 3V2Neo"
 
 /**
  * The SOURCE_CODE_URL is the location where users will find the Marlin Source

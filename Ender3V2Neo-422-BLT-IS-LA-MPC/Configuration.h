@@ -115,9 +115,9 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000  // MRiscoC increase serial performace
+#define BAUDRATE 115200  // MRiscoC increase serial performace // KEN
 
-#define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate  // MRiscoC Enables change the baudrate
+//define BAUD_RATE_GCODE     // Enable G-code M575 to set the baud rate  // MRiscoC Enables change the baudrate // KEN
 
 /**
  * Select a secondary serial port on the board to use for communication with the host.
@@ -139,7 +139,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Ender3V2Neo-422-BLT-IS-LA-MPC"
+#define CUSTOM_MACHINE_NAME "Ender3V2Neo-422-001MD3D" // KEN
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -652,8 +652,8 @@
 
 // Enable PIDTEMP for PID control or MPCTEMP for Predictive Model.
 // temperature control. Disable both for bang-bang heating.
-//#define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning
-#define MPCTEMP        // ** EXPERIMENTAL **
+#define PIDTEMP          // See the PID Tuning Guide at https://reprap.org/wiki/PID_Tuning // KEN
+//#define MPCTEMP        // ** EXPERIMENTAL ** // KEN
 
 #define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
@@ -667,13 +667,13 @@
   #if ENABLED(PID_PARAMS_PER_HOTEND)
     // Specify up to one value per hotend here, according to your setup.
     // If there are fewer values, the last one applies to the remaining hotends.
-    #define DEFAULT_Kp_LIST {  22.20,  22.20 }
-    #define DEFAULT_Ki_LIST {   1.08,   1.08 }
-    #define DEFAULT_Kd_LIST { 114.00, 114.00 }
+    #define DEFAULT_Kp_LIST {  21.73,  21.73 } // KEN
+    #define DEFAULT_Ki_LIST {   1.75,   1.75 } // KEN
+    #define DEFAULT_Kd_LIST {  67.37,  67.37 } // KEN
   #else
-    #define DEFAULT_Kp  22.89
-    #define DEFAULT_Ki   1.87
-    #define DEFAULT_Kd  70.18
+    #define DEFAULT_Kp  21.73 // KEN
+    #define DEFAULT_Ki   1.75 // KEN
+    #define DEFAULT_Kd  67.37 // KEN
   #endif
 #endif
 
@@ -1172,14 +1172,14 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 93 }  // Ender Configs
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 100 }  // Ender Configs // KEN
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 25, 60 }  // Ender Configs
+#define DEFAULT_MAX_FEEDRATE          { 500, 500, 25, 60 }  // Ender Configs // KEN
 
 #define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2  // MRiscoC allows higher limits
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1192,11 +1192,11 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 500, 500, 100, 1000 }  // Ender Configs
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 100, 1000 }  // Ender Configs // KEN
 
 #define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2  // MRiscoC allows higher limits
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 3000, 3000, 300, 9999 } // ...or, set your own edit limits  // MRiscoC allows higher limits
+  #define MAX_ACCEL_EDIT_VALUES       { 6000, 6000, 200, 20000 } // ...or, set your own edit limits  // MRiscoC allows higher limits // KEN
 #endif
 
 /**
@@ -1207,9 +1207,13 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          500    // X, Y, Z and E acceleration for printing moves  // Ender Configs
-#define DEFAULT_RETRACT_ACCELERATION  800    // E acceleration for retracts  // Ender Configs
-#define DEFAULT_TRAVEL_ACCELERATION   1000    // X, Y, Z acceleration for travel (non printing) moves  // Ender Configs
+#define DEFAULT_ACCELERATION            1000    // X, Y, Z and E acceleration for printing moves  // Ender Configs // KEN
+#define DEFAULT_RETRACT_ACCELERATION     500    // E acceleration for retracts  // Ender Configs // KEN
+#define DEFAULT_TRAVEL_ACCELERATION     2000    // X, Y, Z acceleration for travel (non printing) moves  // Ender Configs // KEN
+#if ENABLED(AXIS4_ROTATES) // KEN From Marlin sample config
+  #define DEFAULT_ANGULAR_ACCELERATION        3000  // I, J, K acceleration for rotational-only printing moves
+  #define DEFAULT_ANGULAR_TRAVEL_ACCELERATION 3000  // I, J, K acceleration for rotational-only travel (non printing) moves
+#endif
 
 /**
  * Default Jerk limits (mm/s)
@@ -1249,7 +1253,7 @@
  *   https://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.1 // (mm) Distance from real junction edge
+  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge // KEN
   #define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle
                                       // for small segments (< 1mm) with large junction angles (> 135°).
 #endif
@@ -1262,7 +1266,7 @@
  *
  * See https://github.com/synthetos/TinyG/wiki/Jerk-Controlled-Motion-Explained
  */
-//#define S_CURVE_ACCELERATION  // MRiscoC Enabled
+#define S_CURVE_ACCELERATION  // MRiscoC Enabled // KEN
 
 //===========================================================================
 //============================= Z Probe Options =============================
@@ -1487,7 +1491,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -41.5, -7, 0 }  // MRiscoC BLTouch offset for support: https://www.thingiverse.com/thing:4605354 (z-offset = -1.80 mm)
+#define NOZZLE_TO_PROBE_OFFSET { -39, -12, 0 }  // MRiscoC BLTouch offset for support: https://www.thingiverse.com/thing:4605354 (z-offset = -1.80 mm) // KEN from my own Ender 3 V2 Neo
 
 // Most probes should stay away from the edges of the bed, but
 // with NOZZLE_AS_PROBE this can be negative for a wider probing area.
@@ -1698,15 +1702,15 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 230  // MRiscoC Max usable bed size
-#define Y_BED_SIZE 230  // MRiscoC Max usable bed size
+#define X_BED_SIZE 235  // MRiscoC Max usable bed size // KEN
+#define Y_BED_SIZE 235  // MRiscoC Max usable bed size // KEN
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0  // MRiscoC Stock physical limit
 #define Y_MIN_POS 0  // MRiscoC Stock physical limit
 #define Z_MIN_POS 0
-#define X_MAX_POS 248  // MRiscoC Stock physical limit
-#define Y_MAX_POS 231  // MRiscoC Stock physical limit
+#define X_MAX_POS X_BED_SIZE  // MRiscoC Stock physical limit // KEN
+#define Y_MAX_POS Y_BED_SIZE  // MRiscoC Stock physical limit // KEN
 #define Z_MAX_POS 250  // Ender Configs
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
@@ -1775,7 +1779,7 @@
  * RAMPS-based boards use SERVO3_PIN for the first runout sensor.
  * For other boards you may need to define FIL_RUNOUT_PIN, FIL_RUNOUT2_PIN, etc.
  */
-#define FILAMENT_RUNOUT_SENSOR  // MRiscoC Enabled runout sensor support
+//#define FILAMENT_RUNOUT_SENSOR  // MRiscoC Enabled runout sensor support // KEN
 #if ENABLED(FILAMENT_RUNOUT_SENSOR)
   #define FIL_RUNOUT_ENABLED_DEFAULT true // Enable the sensor on startup. Override with M412 followed by M500.
   #define NUM_RUNOUT_SENSORS   1          // Number of sensors, up to one per extruder. Define a FIL_RUNOUT#_PIN for each.
@@ -1827,7 +1831,7 @@
   // After a runout is detected, continue printing this length of filament
   // before executing the runout script. Useful for a sensor at the end of
   // a feed tube. Requires 4 bytes SRAM per sensor, plus 4 bytes overhead.
-  #define FILAMENT_RUNOUT_DISTANCE_MM 25  // MRiscoC Customizable by menu
+  //#define FILAMENT_RUNOUT_DISTANCE_MM 25  // MRiscoC Customizable by menu // KEN
 
   #ifdef FILAMENT_RUNOUT_DISTANCE_MM
     // Enable this option to use an encoder disc that toggles the runout pin
@@ -1895,7 +1899,7 @@
 #define PREHEAT_BEFORE_LEVELING  // MRiscoC Heatting to compensate thermal expansions
 #if ENABLED(PREHEAT_BEFORE_LEVELING)
   #define LEVELING_NOZZLE_TEMP   0   // (°C) Only applies to E0 at this time  // MRiscoC No necessary for BLTouch
-  #define LEVELING_BED_TEMP     50
+  #define LEVELING_BED_TEMP     60 // KEN
 #endif
 
 /**
@@ -2180,13 +2184,13 @@
  *   M501 - Read settings from EEPROM. (i.e., Throw away unsaved changes)
  *   M502 - Revert settings to "factory" defaults. (Follow with M500 to init the EEPROM.)
  */
-#define EEPROM_SETTINGS     // Persistent storage with M500 and M501  // Ender Configs
+#define EEPROM_SETTINGS       // Persistent storage with M500 and M501  // Ender Configs
 //#define DISABLE_M503        // Saves ~2700 bytes of flash. Disable for release!
-#define EEPROM_CHITCHAT       // Give feedback on EEPROM commands. Disable to save PROGMEM.
+//define EEPROM_CHITCHAT      // Give feedback on EEPROM commands. Disable to save PROGMEM. // KEN From Marlin sample config
 #define EEPROM_BOOT_SILENT    // Keep M503 quiet and only give errors during first load
 #if ENABLED(EEPROM_SETTINGS)
-  #define EEPROM_AUTO_INIT  // Init EEPROM automatically on any errors.  // Ender Configs
-  #define EEPROM_INIT_NOW   // Init EEPROM on first boot after a new build.  // MRiscoC Reset EEPROM on first boot
+  #define EEPROM_AUTO_INIT    // Init EEPROM automatically on any errors.  // Ender Configs
+  #define EEPROM_INIT_NOW     // Init EEPROM on first boot after a new build.  // MRiscoC Reset EEPROM on first boot
 #endif
 
 // @section host
@@ -2219,7 +2223,7 @@
 // Preheat Constants - Up to 10 are supported without changes
 //
 #define PREHEAT_1_LABEL       "PLA"
-#define PREHEAT_1_TEMP_HOTEND 195
+#define PREHEAT_1_TEMP_HOTEND 205 // KEN
 #define PREHEAT_1_TEMP_BED     60
 #define PREHEAT_1_TEMP_CHAMBER 35
 #define PREHEAT_1_FAN_SPEED     128 // Value from 0 to 255
@@ -2231,8 +2235,8 @@
 #define PREHEAT_2_FAN_SPEED     128 // Value from 0 to 255
 
 #define PREHEAT_3_LABEL       "PETG"
-#define PREHEAT_3_TEMP_HOTEND 230
-#define PREHEAT_3_TEMP_BED     80
+#define PREHEAT_3_TEMP_HOTEND 245 // KEN
+#define PREHEAT_3_TEMP_BED     75 // KEN
 #define PREHEAT_3_FAN_SPEED   128
 
 #define PREHEAT_4_LABEL       "CUSTOM"
@@ -3173,7 +3177,7 @@
 //
 //#define DWIN_CREALITY_LCD           // Creality UI
 #define DWIN_LCD_PROUI              // Pro UI by MRiscoC
-// Professional firmware features:
+// Professional firmware features: // KEN Note to self: Analyze this one if these settings cause cornering issues.
 #define ProUIex 1
 #define HAS_GCODE_PREVIEW 1
 #define HAS_TOOLBAR 1
