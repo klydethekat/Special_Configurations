@@ -1127,13 +1127,13 @@
 #define DISABLE_INACTIVE_X true
 #define DISABLE_INACTIVE_Y true
 #define DISABLE_INACTIVE_Z true  // Set 'false' if the nozzle could fall onto your printed part!
-#define DISABLE_INACTIVE_I false // KEN From Marlin sample config
-#define DISABLE_INACTIVE_J false // KEN From Marlin sample config
-#define DISABLE_INACTIVE_K false // KEN From Marlin sample config
-#define DISABLE_INACTIVE_U false // KEN From Marlin sample config
-#define DISABLE_INACTIVE_V false // KEN From Marlin sample config
-#define DISABLE_INACTIVE_W false // KEN From Marlin sample config
-#define DISABLE_INACTIVE_E false // KEN From Marlin sample config Sus
+#define DISABLE_INACTIVE_I true  // KEN Reverted
+#define DISABLE_INACTIVE_J true  // KEN Reverted
+#define DISABLE_INACTIVE_K true  // KEN Reverted
+#define DISABLE_INACTIVE_U true  // KEN Reverted
+#define DISABLE_INACTIVE_V true  // KEN Reverted
+#define DISABLE_INACTIVE_W true  // KEN Reverted
+#define DISABLE_INACTIVE_E true  // KEN Reverted, sus for cornerning issues
 
 // Default Minimum Feedrates for printing and travel moves
 #define DEFAULT_MINIMUMFEEDRATE       0.0     // (mm/s. °/s for rotational-only moves) Minimum feedrate. Set with M205 S.
@@ -2202,7 +2202,7 @@
  * Repeatedly attempt G29 leveling until it succeeds.
  * Stop after G29_MAX_RETRIES attempts.
  */
-//#define G29_RETRY_AND_RECOVER // KEN From Marlin sample config
+#define G29_RETRY_AND_RECOVER // KEN From Marlin sample config. Re-enabled, not sus.
 #if ENABLED(G29_RETRY_AND_RECOVER)
   #define G29_MAX_RETRIES 3
   #define G29_HALT_ON_FAILURE
@@ -3059,7 +3059,7 @@
    * Define your own with:
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_DEFAULT_12V        // All axes (override below)  // MRiscoC Correct value for UART mode drivers // KEN Investigate this one.
+  #define CHOPPER_TIMING CHOPPER_DEFAULT_12V        // All axes (override below)  // MRiscoC Correct value for UART mode drivers // KEN Investigate this one. 12V not problematic.
   //#define CHOPPER_TIMING_X  CHOPPER_TIMING        // For X Axes (override below)
   //#define CHOPPER_TIMING_X2 CHOPPER_TIMING_X
   //#define CHOPPER_TIMING_Y  CHOPPER_TIMING        // For Y Axes (override below)
