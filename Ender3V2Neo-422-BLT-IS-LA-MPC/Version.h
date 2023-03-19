@@ -28,13 +28,13 @@
 /**
  * Marlin release version identifier
  */
-#define SHORT_BUILD_VERSION "0.0.1 Maker Dash 3D"
+#define SHORT_BUILD_VERSION "0.0.2 Maker Dash 3D"
 
 /**
  * Verbose version identifier which should contain a reference to the location
  * from where the binary was downloaded or the source code was compiled.
  */
-#define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION "Ender3V2Neo-422-001MD3D, based on bugfix-2.1.x" // KEN tmi
+#define DETAILED_BUILD_VERSION SHORT_BUILD_VERSION "Ender3V2Neo-422-002MD3D, based on bugfix-2.1.x" // KEN tmi
 
 /**
  * The STRING_DISTRIBUTION_DATE represents when the binary file was built,

@@ -139,7 +139,7 @@
 //#define BLUETOOTH
 
 // Name displayed in the LCD "Ready" message and Info menu
-#define CUSTOM_MACHINE_NAME "Ender3V2Neo-422-001MD3D" // KEN
+#define CUSTOM_MACHINE_NAME "Ender3V2Neo-422-002MD3D" // KEN 002MD3D
 
 // Printer's unique ID, used by some programs to differentiate between machines.
 // Choose your own or use a service like https://www.uuidgenerator.net/version4
@@ -1172,7 +1172,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 100 }  // Ender Configs // KEN
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 97.3 }  // Ender Configs // KEN 002MD3D
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
@@ -1253,7 +1253,7 @@
  *   https://blog.kyneticcnc.com/2018/10/computing-junction-deviation-for-marlin.html
  */
 #if DISABLED(CLASSIC_JERK)
-  #define JUNCTION_DEVIATION_MM 0.013 // (mm) Distance from real junction edge // KEN
+  #define JUNCTION_DEVIATION_MM 0.2 // (mm) Distance from real junction edge // KEN 002MD3D
   #define JD_HANDLE_SMALL_SEGMENTS    // Use curvature estimation instead of just the junction angle
                                       // for small segments (< 1mm) with large junction angles (> 135°).
 #endif
@@ -1551,8 +1551,8 @@
  * A total of 2 does fast/slow probes with a weighted average.
  * A total of 3 or more adds more slow probes, taking the average.
  */
-#define MULTIPLE_PROBING 2  // MRiscoC Enabled
-#define EXTRA_PROBING    1  // MRiscoC Enabled
+//#define MULTIPLE_PROBING 2  // MRiscoC Enabled // KEN 002MD3D
+//#define EXTRA_PROBING    1  // MRiscoC Enabled // KEN 002MD3D
 
 /**
  * Z probes require clearance when deploying, stowing, and moving between
